@@ -58,3 +58,4 @@ JDK           | 7.0   |
 * 各组组长申请education plan之后，将popush复制成私人项目，并添加助教作为协作者
 * 各组在私有仓库完成指定功能之后，请在[issues](https://github.com/qiankanglai/popush/issues)声明，助教会检查对应的commits
 * 每轮检查之后，助教会选出符合要求的一组代码合并到主仓库
+
