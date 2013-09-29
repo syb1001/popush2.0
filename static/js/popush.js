@@ -125,6 +125,20 @@ function pressenter(e, func) {
 		func();
 }
 
+/**
+ * answer the keydown event of the name input
+ * @author syb
+ */
+function registerInput(e) {
+	e = e || event;
+	var name = $('#register-inputName').val();
+	if (!/^[A-Za-z0-9]*$/.test(name)) {
+		showmessage('register-message', 'name invalid');
+	} else {
+		$("#register-message").slideUp();
+	}
+}
+
 function loadfailed() {
 	if(loadDone)
 		return;
