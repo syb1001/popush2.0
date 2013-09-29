@@ -9,6 +9,17 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 .hero-unit a {text-decoration:none;}
 .hero-unit a:hover {text-decoration:none;}
 
+#login .span4 {background-color:#F8F8F8;border: 1px solid #D3CDB0;border-radius: 10px;}
+#nav-head .container {background-color: #D1E05E;box-shadow: 5px 0px 5px #000000;}
+#file-list .span10 {background-color: rgb(255, 163, 237);box-shadow: -5px 5px 5px rgb(102, 102, 102);}
+.col1 {background-color: rgb(121, 208, 174);} 
+.col2 {background-color: #C3E8C9;} 
+.col3 {background-color: #CFBFC8;} 
+.col4 {background-color: #FADCD2;} 
+.col5 {background-color: #D3A198;} 
+.container-fluid {background-color: #999999;box-shadow: 0px 5px 5px #222222;} 
+body{background-color: #6B4C7A;}
+
 .hero-unit {min-width:820px;}
 .container-fluid {min-width:900px;}
 
