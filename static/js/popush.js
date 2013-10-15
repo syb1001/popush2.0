@@ -32,6 +32,18 @@ var gutterclick;
 
 var firstconnect = true;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// edit by Gong Yunqing /////////////////////////////////////////////////////
+//// about localization
+var strings = strings_zh_cn;
+var stringsmap;
+//////////////////////////////////////// edit by Gong Yunqing /////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 /////////////////////// locks //////////////////////////////////
 var loginLock = false;
 var registerLock = false;
@@ -76,6 +88,32 @@ function cleanloading() {
 	}
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// modified by Gong Yunqing /////////////////////////////////////////////////
+
+function showmessage(id, stringid, type) {
+	var o = $('#' + id);
+	o.removeClass('alert-error');
+	o.removeClass('alert-success');
+	o.removeClass('alert-info');
+	if(type && type != '' && type != 'warning')
+		o.addClass('alert-' + type);
+	if(strings[stringid])
+		$('#' + id + ' span').html(strings[stringid]);
+	else
+		$('#' + id + ' span').html(stringid);
+
+	// add attribute 'localization' to this node.
+	$('#' + id + ' span').parent().attr("messagelocalization", stringid);
+
+	o.slideDown();
+}
+
+///////////////////////////////////// orginal code /////////////////////////////////////////////////////////////////
+/*
 function showmessage(id, stringid, type) {
 	var o = $('#' + id);
 	o.removeClass('alert-error');
@@ -89,6 +127,14 @@ function showmessage(id, stringid, type) {
 		$('#' + id + ' span').html(stringid);
 	o.slideDown();
 }
+/////////// orginal code ///////////
+
+*/
+
+//////////////////////////////////////// modified by Gong Yunqing //////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 function showmessageindialog(id, stringid, index) {
 	if(index === undefined) {
@@ -123,6 +169,20 @@ function pressenter(e, func) {
 	e = e || event;
 	if(e.keyCode == 13 && loadDone)
 		func();
+}
+
+/**
+ * answer the keydown event of the name input
+ * @author syb
+ */
+function registerInput(e) {
+	e = e || event;
+	var name = $('#register-inputName').val();
+	if (!/^[A-Za-z0-9]*$/.test(name)) {
+		showmessage('register-message', 'name invalid');
+	} else {
+		$("#register-message").slideUp();
+	}
 }
 
 function loadfailed() {
@@ -1022,7 +1082,43 @@ $(document).ready(function() {
 	$('#share').on('shown', function() {
 		$('#share-inputName').focus();
 	});
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// modified by Gong Yunqing /////////////////////////////////////////////////
+
 	
+	stringsmap = {
+		"zh_cn": strings_zh_cn,
+		"en_us": strings_en_us,
+	};
+	//// initialize the attribute and innertext of each node with the attribute "localization" ////
+	$('[localization]').each(function(){
+
+		//// add text content to the attribute "localization" of $(this) ////
+		$(this).attr('localization', $(this).html());
+		//// change text content of $(this) corresponding to the global variable 'strings'.////
+		$(this).html(function(index, old) {
+			if(strings[old])
+				return strings[old];
+			return old;
+		})
+	});
+	//// add an attribute named 'titlelocalization' to each node that has an attribute as 'title'
+	//// and set the value of the attribute named 'titlelocalization' as the value of the attribute named 'title'
+	$('[title]').each(function(){
+		var attrValueStr = $(this).attr('title');
+		$(this).attr('titlelocalization', attrValueStr);
+	});
+
+
+
+
+////////////////////////////////////////// orginal code //////////////////////////////////////////////////////////////
+	/*
 	$('[localization]').html(function(index, old) {
 		if(strings[old])
 			return strings[old];
@@ -1035,6 +1131,15 @@ $(document).ready(function() {
 		return old;
 	});
 	
+	*/	
+///////////////////////////////////////// modified by Gong Yunqing ////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 	if(!ENABLE_RUN) {
 		$('#editor-run').remove();
 		if(!ENABLE_DEBUG) {
@@ -1068,4 +1173,63 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		$('#editormain-inner').css('left', (-$(window).scrollLeft()) + 'px');
 	});
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// added by Gong Yunqing ////////////////////////////////////////////////////
+
+	//// initialize the attribute and innertext of each node with the attribute "class='alert hide'" /////
+	/* redundant
+	$("[class='alert hide']").each(function(){
+		//// get the text content of the child node <span> ////		
+		var textStr = $(this).find("span").html();
+		
+		//// add the text content to the attribute "localization" of $(this), ie a node like this: <div class="alert hide"> ////
+		$(this).attr('localization', textStr);
+		//// change text content of the child node <span> corresponding to the global variable 'strings' ////
+		
+		$(this).find("span").html(strings[textStr]);
+		
+	})
+	*/
+
+
+
+	//// onchange event of select label
+	$("select[name='chooselanguage']").change(function () {
+	
+	  	/////  Get the value of the option selected
+		var languageChoiceStr = $("select[name='chooselanguage'] option:selected").attr("value");
+		//// change the glocal variable 'strings'
+	    strings = stringsmap[languageChoiceStr];
+	  
+	    //// change the text content of each node with a attribute 'localization' corresponding to the global variable 'strings'
+	  	$('[localization]').each(function(){
+	  		if (strings[$(this).attr("localization")])
+	  			$(this).html(strings[$(this).attr("localization")]);
+	  	});
+	  	//// change the text content of each <span> node whose parent node is a node with a attribute 'class="alert hide"'
+	  	$("[class='alert hide']").each(function(){
+	  		if ($(this).attr("messagelocalization")){
+	  			var attributeString = $(this).attr("messagelocalization");
+	  			if (strings[attributeString])
+	  				$(this).find("span").html(strings[attributeString]);
+	  		}	  		
+	  	});
+	  	//// change the value of the attribute named 'title' of each node having an attribute as 'title'
+	  	//// corresponding to the value of the attribute named 'titlelocalization' and the gobal viriable 'strings'
+	  	$('[title]').each(function(){
+			var attrValueStr = $(this).attr('titlelocalization');
+			if(strings[attrValueStr])
+				$(this).attr('title', strings[attrValueStr]);
+		});
+
+
+	})
+//////////////////////////////////////// added by Gong Yunqing //////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });
