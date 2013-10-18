@@ -2,13 +2,20 @@
 <html>
 <head>
 	<title>Popush</title>
-	<script type="text/javascript" src="js/lib/angular.min.js"></script>
-	<script type="text/javascript" src="js/lib/angular-ui-router.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<meta charset="UTF-8">
+	<!-- 引用的css库 -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">	
 </head>
 <body ng-app="app">
 	<div ui-view>
-		<!-- Here to add templates -->
+		<!-- 此处放置模板 -->
 	</div>
+	<!-- 引用的js库 -->
+	<script type="text/javascript" src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="lib/socket.io.min.js"></script>
+	<!-- 项目js文件 -->
+	<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
