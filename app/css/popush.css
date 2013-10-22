@@ -4,7 +4,7 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 
 .switch-rel {margin:5px 0 0 120px;}
 
-.hero-unit {background-image:url(../images/back.png);color:#ddd;overflow:hidden;}
+.hero-unit {background-image:url(../img/back.png);color:#ddd;overflow:hidden;}
 .hero-unit {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 .hero-unit a {text-decoration:none;}
 .hero-unit a:hover {text-decoration:none;}
