@@ -1,4 +1,4 @@
-<div class="row-fluid" id="register">
+<div class="row-fluid" id="register" ng-controller="RegisterCtrl">
 	<div class="span4 offset4">
 		<h2 style="text-align:center" class="blink" localization>注册</h2>
 		<div class="alert" id="register-message">
@@ -8,26 +8,26 @@
 		<hr />
 		<div id="register-box" class="form-horizontal" style="min-width:420px;position:relative;">
 			<div class="control-group">
-				<label class="control-label" for="register-inputName" localization>用户名</label>
+				<label class="control-label" for="register-inputName" localization ng-model="registerName">用户名</label>
 				<div class="controls">
 					<input type="text" id="register-inputName" />
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="register-inputPassword" localization>密码</label>
+				<label class="control-label" for="register-inputPassword" localization ng-model="registerPassword">密码</label>
 				<div class="controls">
 					<input type="password" id="register-inputPassword" />
 				</div>
 			</div>
 			<div class="control-group" id="register-padding">
-				<label class="control-label" for="register-inputPassword" localization>确认密码</label>
+				<label class="control-label" for="register-inputPassword" localization ng-model="registerAgainpassword">确认密码</label>
 				<div class="controls">
 					<input type="password" id="register-confirmPassword" />
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls" id="register-control">
-					<button type="submit" class="btn" localization>注册</button>
+					<button type="submit" class="btn" localization ng-click="registerSubmit()">注册</button>
 					<a class="switch-rel" ui-sref="login" localization>登录</a>
 				</div>
 			</div>
