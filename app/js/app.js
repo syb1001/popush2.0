@@ -5,6 +5,7 @@
  *
  * 模块依赖项：
  * app.router 路由模块
+ * app.socket SocketIO封装模块
  * 
  */
-angular.module('app', ['app.router']);
+angular.module('app', ['app.router', 'app.socket']);
