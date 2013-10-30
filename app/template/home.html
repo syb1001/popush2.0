@@ -15,7 +15,11 @@
 	<div id="footer" class="row-fluid">
 	<hr />
 	<div class="span11">
-		<p style="text-align:right" localization>popush开发小组敬上</p>
+        <div ng-controller="TranslateCtrl" >
+            <button style="width:100px" ng-click="changeLanguage('en_us')" translate="BUTTON_TEXT_EN"></button>
+            <button style="width:100px" ng-click="changeLanguage('cn_zh')" translate="BUTTON_TEXT_CN"></button>
+        </div>
+		<p style="text-align:right" localization>{{ 'ABOUT_TEAM' | translate }}</p>
 		<p> &nbsp; </p>
 	</div>
 	</div>

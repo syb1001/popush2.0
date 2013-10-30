@@ -8,11 +8,7 @@
  *
  */
 angular.module('app').controller('TranslateCtrl', function ($translate, $scope) {
-    $scope.num = 0;
-    $scope.testStr = "click times";
     $scope.changeLanguage = function (langKey) {
         $translate.uses(langKey);
-        $scope.num ++;
-        $scope.testStr += $scope.num;
     };
 });

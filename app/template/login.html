@@ -1,30 +1,40 @@
 <div class="row-fluid" id="login">
 	<div class="span4 offset4">
-		<h2 style="text-align:center" class="blink" localization>登录</h2>
-		<div class="alert" id="login-message">
+		<h2 style="text-align:center" class="blink" localization>{{ 'LOGIN' | translate }}</h2>
+		<div class="alert" id="login-message" >
 			<button type="button" class="close">&times;</button>
 			<span>消息</span>
 		</div>
 		<hr />
-		<div id="login-box" class="form-horizontal" style="min-width:420px;position:relative;">
+		<form name="logInForm" ng-controller="LoginCtrl" ng-submit="submitLogIn()" id="login-box" class="form-horizontal" style="min-width:420px;position:relative;">
 			<div class="control-group">
-				<label class="control-label" for="login-inputName" localization>用户名</label>
+				<label class="control-label" for="login-inputName" localization>{{ 'USERNAME' | translate}}</label>
 				<div class="controls">
-					<input type="text" id="login-inputName" />
+					<input type="text" id="login-inputName" name="userNameLogIn" required ng-model="userName" placeholder="{{ 'YOUR_USERNAME' | translate }}" ng-minlength=6 ng-maxlength=20/>
+                    <!--
+                    <span class="error" ng-show="logInForm.userNameLogIn.$error.required">{{ 'ITEM_REQUIRED' | translate }}</span>
+                    <span class="error" ng-show="!logInForm.userNameLogIn.$error.required && !logInForm.userNameLogIn.$valid">{{ 'LENGTH_INVALID' | translate }}</span><br>
+                    -->
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="login-inputPassword" localization>密码</label>
+				<label class="control-label" for="login-inputPassword" localization>{{ 'PASSWORD' | translate }}</label>
 				<div class="controls">
-					<input type="password" id="login-inputPassword" />
+					<input type="password" id="login-inputPassword" name="userPasswordLogIn" required ng-model="userPassword" placeholder="{{ 'YOUR_PASSWORD' | translate }}" ng-minlength=6 ng-maxlength=20/>
+                    <!--
+                    <span class="error" ng-show="logInForm.userPasswordLogIn.$error.required">{{ 'ITEM_REQUIRED' | translate }}</span><br>
+                    -->
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls" id="login-control">
-					<button type="submit" class="btn" localization>登录</button>
-					<a class="switch-rel" ui-sref="register" localization>注册</a>
+                    <input type="submit" value="{{ 'LOGIN' | translate }}" />
+                    <!--
+					<button type="submit" class="btn" localization>{{ 'LOGIN' | translate }}</button>
+					-->
+					<a class="switch-rel" ui-sref="register" localization>{{ 'REGISTER' | translate }}</a>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 <div class="row-fluid" id="register">
 	<div class="span4 offset4">
-		<h2 style="text-align:center" class="blink" localization>注册</h2>
+		<h2 style="text-align:center" class="blink" localization>{{ 'REGISTER' | translate }}</h2>
 		<div class="alert" id="register-message">
 			<button type="button" class="close">&times;</button>
 			<span>消息</span>
@@ -8,27 +8,27 @@
 		<hr />
 		<div id="register-box" class="form-horizontal" style="min-width:420px;position:relative;">
 			<div class="control-group">
-				<label class="control-label" for="register-inputName" localization>用户名</label>
+				<label class="control-label" for="register-inputName" localization>{{ 'USERNAME' | translate }}</label>
 				<div class="controls">
 					<input type="text" id="register-inputName" />
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="register-inputPassword" localization>密码</label>
+				<label class="control-label" for="register-inputPassword" localization>{{ 'PASSWORD' | translate }}</label>
 				<div class="controls">
 					<input type="password" id="register-inputPassword" />
 				</div>
 			</div>
 			<div class="control-group" id="register-padding">
-				<label class="control-label" for="register-inputPassword" localization>确认密码</label>
+				<label class="control-label" for="register-inputPassword" localization>{{ 'CONFIRM_PASSWORD' | translate }}</label>
 				<div class="controls">
 					<input type="password" id="register-confirmPassword" />
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls" id="register-control">
-					<button type="submit" class="btn" localization>注册</button>
-					<a class="switch-rel" ui-sref="login" localization>登录</a>
+					<button type="submit" class="btn" localization>{{ 'REGISTER' | translate }}</button>
+					<a class="switch-rel" ui-sref="login" localization>{{ 'REGISTER' | translate }}</a>
 				</div>
 			</div>
 		</div>

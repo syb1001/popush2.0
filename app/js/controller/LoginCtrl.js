@@ -8,20 +8,9 @@
  *
  */
 angular.module('app').controller("LoginCtrl", function($scope){
-    $scope.$model = {
-        message: "login page"
-    };
-    $scope.isLogIn = true;
-    $scope.userNameLogIn = "";
-    $scope.userPasswordLogIn = "";
-    $scope.userNameSignUp = "";
-    $scope.userPasswordSignUp = "";
-
+    $scope.userName = "";
+    $scope.userPassword = "";
     $scope.submitLogIn = function() {
-        if (this.text) {
-            alert("Log In Successfully!");
-
-        }
     };
 })
 
