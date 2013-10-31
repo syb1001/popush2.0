@@ -21,7 +21,8 @@ angular.module('app.socket')
  * socket.io封装
  * 提供可能需要的通信函数
  */
-angular.factory('socket', ['$rootScope', function($rootScope) {
+angular.module('app.socket').
+	factory('socket', ['$rootScope', 'SOCKET_IO', function($rootScope, SOCKET_IO) {
 	
 	// 连接服务器
 	var socket = io.connect(SOCKET_IO);
@@ -39,19 +40,13 @@ angular.factory('socket', ['$rootScope', function($rootScope) {
 	};
 
 	// socket.on封装
-	var addListener = function(name, scope, callback) {
-		if (arguments.length == 2) {
-			scope = null;
-			callback = arguments[1];
-		}
-
-		socket.addListener(name, socketCallback(callback));
-
-		if (scope != null) {
-			scope.$on('$destroy', function() {
-				removeListener(name, callback);
-			})
-		}
+	var addListener = function(name, callback) {
+		socket.on(name, function() {
+			var args = arguments;
+			$rootScope.$apply(function() {
+				callback.apply(socket, args);
+			});
+		});
 	};
 
 	// socket.removeListener封装

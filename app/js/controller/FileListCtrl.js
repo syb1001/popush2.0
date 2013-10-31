@@ -1,0 +1,3 @@
+function FileListCtrl($scope, socket) {
+	
+}

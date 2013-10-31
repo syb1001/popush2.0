@@ -1,30 +1,30 @@
-<div class="row-fluid" id="login" ng-controller="LoginCtrl">
+<div class="row-fluid" id="login">
 	<div class="span4 offset4">
-		<h2 style="text-align:center" class="blink" localization>登录</h2>
+		<h2 style="text-align:center" class="blink">{{'LOGIN' | translate}}</h2>
 		<div class="alert" id="login-message">
 			<button type="button" class="close">&times;</button>
-			<span>消息</span>
+			<span>{{message}}</span>
 		</div>
 		<hr />
-		<div id="login-box" class="form-horizontal" style="min-width:420px;position:relative;">
+		<form id="login-box" class="form-horizontal" style="min-width:420px;position:relative;" ng-submit="loginSubmit()">
 			<div class="control-group">
-				<label class="control-label" for="login-inputName" localization>用户名</label>
+				<label class="control-label" for="login-inputName">{{'USERNAME' | translate}}</label>
 				<div class="controls">
 					<input type="text" id="login-inputName" ng-model="loginName"/>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="login-inputPassword" localization>密码</label>
+				<label class="control-label" for="login-inputPassword">{{'PASSWORD' | translate}}</label>
 				<div class="controls">
 					<input type="password" id="login-inputPassword" ng-model="loginPassword"/>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls" id="login-control">
-					<button type="submit" class="btn" localization ng-click="loginSubmit()">登录</button>
-					<a class="switch-rel" ui-sref="register" localization>注册</a>
+					<button type="submit" class="btn">{{'LOGIN' | translate}}</button>
+					<a class="switch-rel" ui-sref="register">{{'REGISTER' | translate}}</a>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

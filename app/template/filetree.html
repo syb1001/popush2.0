@@ -1,0 +1,16 @@
+<table>
+    <thead>
+    <tr>
+        <th>Filename</th>
+        <th>Size</th>
+        <th>Modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="file in files">
+        <td><a href="#/{{ file.type }}/{{ file.id }}">{{ file.name }}</a></td>
+        <td>{{ file.size }}</td>
+        <td>{{ file.modified }}</td>
+    </tr>
+    </tbody>
+</table>

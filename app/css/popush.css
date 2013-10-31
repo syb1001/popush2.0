@@ -4,6 +4,12 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 
 .switch-rel {margin:5px 0 0 120px;}
 
+.myhome{background-image: url(../img/background.png);height: 800px;width: auto;}
+#myregister{float:right; padding:20px;margin-right:80px;margin-top:230px;margin-bottom:140px;background-color:rgba(180,180,180,0.3)}
+#mylogin{float:right; padding:20px;margin-right:80px;margin-top:280px;margin-bottom:140px;background-color:rgba(180,180,180,0.3)}
+#login-box{margin-right:0px;}
+
+
 .hero-unit {background-image:url(../img/back.png);color:#ddd;overflow:hidden;}
 .hero-unit {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 .hero-unit a {text-decoration:none;}
