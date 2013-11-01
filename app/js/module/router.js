@@ -63,11 +63,6 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 				templateUrl: 'template/navbar.html',
 				controller: NavbarCtrl
 			},
-			// // 文件树
-			// 'filetree': {
-			// 	templateUrl: 'template/filetree.html',
-			// 	controller: FileTreeCtrl
-			// },
 			// 文件列表
 			'filelist': {
 				templateUrl: 'template/filelist.html',

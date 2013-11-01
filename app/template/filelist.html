@@ -30,6 +30,10 @@
 						<th class="col4">{{"MODIFY_TIME" | translate}}</th>
 						<th class="col5">&nbsp;</th>
 					</tr>
+					<tr ng-hide="list.length">
+						<td class="col1"></td>
+						<td class="col2">{{"NO_FILE" | translate}}</td>
+					</tr>
 					<tr ng-repeat="doc in list">
 						<td class="col1"><img src={{doc.iconPath}}></td>
 						<td class="col2"><a href="javascript:;">{{doc.fileName}}</a></td>

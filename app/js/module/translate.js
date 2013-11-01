@@ -39,7 +39,8 @@ angular.module('app.translate')
 			"MODIFY_TIME":		"modify time",
 			"SHARE_MANAGE":		"share manage",
 			"DELETE":			"delete",
-			"RENAME":			"rename"	
+			"RENAME":			"rename",
+			"NO_FILE":			"no file"
 		});
 
 		// 中文
@@ -67,7 +68,8 @@ angular.module('app.translate')
 			"MODIFY_TIME":		"修改时间",
 			"SHARE_MANAGE":		"共享管理",
 			"DELETE":			"删除",
-			"RENAME":			"重命名"
+			"RENAME":			"重命名",
+			"NO_FILE":			"没有文件"
 		});
 
 		// 选择初始语言
