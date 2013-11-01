@@ -46,8 +46,8 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 	});
 
 	// 文件管理页，父页面，抽象
-	$stateProvider.state('container', {
-		name: 'container',
+	$stateProvider.state('dashboard', {
+		name: 'dashboard',
 		abstract: true,
 		templateUrl: 'template/dashboard.html'
 	});
