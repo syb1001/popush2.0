@@ -9,7 +9,7 @@ function LoginCtrl($scope, $location, socket, GlobalCtrl) {
 		} else {
 			$scope.message = '登陆成功!';
 			GlobalCtrl.user = data.user;
-			$location.path('/dashboard');
+			$location.path('/myfile');
 		}
 	});
 

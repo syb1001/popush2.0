@@ -1,4 +1,4 @@
-function FileListCtrl($scope, socket, GlobalCtrl, FileTypeCtrl, UtilCtrl) {
+function MyFileCtrl($scope, socket, GlobalCtrl, FileTypeCtrl, UtilCtrl) {
 	
 	$scope.user = GlobalCtrl.user;
 	GlobalCtrl.currentPath = '/syb1001';
@@ -7,7 +7,7 @@ function FileListCtrl($scope, socket, GlobalCtrl, FileTypeCtrl, UtilCtrl) {
 		{text: 'SHARE_MANAGE', href:' #'},
 		{text: 'DELETE', href: '#'},
 		{text: 'RENAME', href: '#'}
-	];	
+	];
 
 	$scope.refresh = function() {
 		socket.emit('doc', {

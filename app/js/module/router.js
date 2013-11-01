@@ -19,15 +19,18 @@ angular.module('app.router')
 
 angular.module('app.router').config(['$stateProvider', function($stateProvider) {
 	// 设置路由
+	// 形成一个嵌套的树形结构
 	
-	// 主页，父页面，抽象
+	// 页1
+	// 首页，抽象
 	$stateProvider.state('home', {
 		name: 'home',
 		abstract: true,
 		templateUrl: 'template/home.html'
 	});
 
-	// 登录页，子页面
+	// 页1.1
+	// 登录页
 	$stateProvider.state('login', {
 		name: 'login',
 		parent: 'home',
@@ -36,7 +39,8 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 		controller: LoginCtrl
 	});
 
-	// 注册页，子页面
+	// 页1.2
+	// 注册页
 	$stateProvider.state('register', {
 		name: 'register',
 		parent: 'home',
@@ -45,34 +49,44 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 		controller: RegisterCtrl
 	});
 
-	// 文件管理页，父页面，抽象
-	$stateProvider.state('container', {
-		name: 'container',
+	// 页2
+	// 主页，抽象
+	$stateProvider.state('main', {
+		name: 'main',
 		abstract: true,
-		templateUrl: 'template/dashboard.html'
+		templateUrl: 'template/main.html'
+		// 页面中导航条单独定义控制器
 	});
 
-	// 文件管理页，子页面，多视图，不可设置模板
-	$stateProvider.state('dashboard', {
-		name: 'dashboard',
-		parent: 'container',
-		url: '/dashboard',
-		views: {
-			// 导航栏
-			'navbar': {
-				templateUrl: 'template/navbar.html',
-				controller: NavbarCtrl
-			},
-			// // 文件树
-			// 'filetree': {
-			// 	templateUrl: 'template/filetree.html',
-			// 	controller: FileTreeCtrl
-			// },
-			// 文件列表
-			'filelist': {
-				templateUrl: 'template/filelist.html',
-				controller: FileListCtrl
-			}
+	// 页2.1
+	// 个人文件列表
+	$stateProvider.state('myfile', {
+		name: 'myfile',
+		parent: 'main',
+		url: '/myfile',
+		templateUrl: 'template/myfile.html',
+		controller: MyFileCtrl
+	});
+
+	// 页2.2
+	// 共享文件列表
+	$stateProvider.state('sharedfile', {
+		name: 'sharedfile',
+		parent: 'main',
+		url: '/shardefile',
+		templateUrl: 'template/sharedfile.html',
+		controller: SharedFileCtrl
+	});
+
+	// 页2.3
+	// 协同编辑页面
+	$stateProvider.state('edit', {
+		name: 'edit',
+		parent: 'main',
+		url: '/edit',
+		template: '<div>edit page</div><a ui-sref="myfile">to myfile</a>',
+		controller: function() {
+			alert('edit page');
 		}
 	});
 }]);

@@ -1,20 +1,20 @@
 <div class="myhome">
-<!-- <div class="hero-unit" id="big-one">
-	<div class="container">
-		<div class="row">
-			<h1>&nbsp;</h1>
-			<p class="lead">&nbsp;</p>
-		</div>
-	</div>
-</div> -->
 	<div ui-view>
 		<!-- 此处放置模板 -->
 	</div>
-
+	<!-- 脚注 -->
 	<div id="footer" class="row-fluid">
-	<div class="span11">
-		<p style="text-align:right">{{'ABOUT_TEAM' | translate}}</p>
-		<p> &nbsp; </p>
+		<div class="span11">
+			<p style="text-align:right">
+				{{'ABOUT_TEAM' | translate}}
+			</p>
+		</div>
 	</div>
+	<!-- 浮动语言选框 -->
+	<div id="lang-box" class="dropdown" ng-controller="HomeLangCtrl">
+		<a href="javascript:;" class="dropdown-toggle">{{'LANGUAGE' | translate}}</a>
+		<ul class="dropdown-menu">
+			<li ng-repeat="lang in langs"><a ng-click="useLanguage(lang.key)">{{lang.name}}</a></li>
+		</ul>
 	</div>
 </div>

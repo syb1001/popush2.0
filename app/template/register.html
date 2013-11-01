@@ -7,24 +7,28 @@
 		</div>
 		<hr />
 		<form id="register-box" class="form-horizontal" style="min-width:420px;position:relative;" ng-submit="registerSubmit()">
+			<!-- 用户名 -->
 			<div class="control-group">
 				<label class="control-label" for="register-inputName">{{'USERNAME' | translate}}</label>
-				<div class="controls">
+				<div class="controls input-control">
 					<input type="text" id="register-inputName" ng-model="registerName" />
 				</div>
 			</div>
+			<!-- 密码 -->
 			<div class="control-group">
 				<label class="control-label" for="register-inputPassword">{{'PASSWORD' | translate}}</label>
-				<div class="controls">
+				<div class="controls input-control">
 					<input type="password" id="register-inputPassword" ng-model="registerPassword"/>
 				</div>
 			</div>
+			<!-- 确认密码 -->
 			<div class="control-group" id="register-padding">
 				<label class="control-label" for="register-inputPassword" >{{'CONFIRM_PASSWORD' | translate}}</label>
-				<div class="controls">
+				<div class="controls input-control">
 					<input type="password" id="register-confirmPassword" ng-model="confirmPassword"/>
 				</div>
 			</div>
+			<!-- 按钮 -->
 			<div class="control-group">
 				<div class="controls" id="register-control">
 					<button type="submit" class="btn">{{'REGISTER' | translate}}</button>

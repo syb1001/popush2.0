@@ -7,18 +7,21 @@
 		</div>
 		<hr />
 		<form id="login-box" class="form-horizontal" style="min-width:420px;position:relative;" ng-submit="loginSubmit()">
+			<!-- 用户名 -->
 			<div class="control-group">
 				<label class="control-label" for="login-inputName">{{'USERNAME' | translate}}</label>
-				<div class="controls">
+				<div class="controls input-control">
 					<input type="text" id="login-inputName" ng-model="loginName"/>
 				</div>
 			</div>
+			<!-- 密码 -->
 			<div class="control-group">
 				<label class="control-label" for="login-inputPassword">{{'PASSWORD' | translate}}</label>
-				<div class="controls">
+				<div class="controls input-control">
 					<input type="password" id="login-inputPassword" ng-model="loginPassword"/>
 				</div>
 			</div>
+			<!-- 按钮 -->
 			<div class="control-group">
 				<div class="controls" id="login-control">
 					<button type="submit" class="btn">{{'LOGIN' | translate}}</button>

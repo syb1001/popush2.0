@@ -16,4 +16,5 @@ angular.module('app.controller', ['ui.bootstrap'])
 	.controller('LoginCtrl', ['$scope', '$location', 'socket', 'GlobalCtrl', LoginCtrl])
 	.controller('RegisterCtrl', ['$scope', 'socket', 'GlobalCtrl', RegisterCtrl])
 	.controller('NavbarCtrl', ['$scope', NavbarCtrl])
-	.controller('FileListCtrl', ['$scope', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', FileListCtrl]);
+	.controller('MyFileCtrl', ['$scope', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', MyFileCtrl])
+	.controller('SharedFileCtrl', ['$scope', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', SharedFileCtrl]);

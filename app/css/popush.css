@@ -5,10 +5,16 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 .switch-rel {margin:5px 0 0 120px;}
 
 .myhome{background-image: url(../img/background.png);height: 675px;width: auto;min-width:1150px;}
-#myregister{float:right; padding:20px;margin-right:95px;margin-top:12%;margin-bottom:5%;background-color:rgba(180,180,180,0.3)}
-#mylogin{float:right; padding:20px;margin-right:95px;margin-top:12%;margin-bottom:8.9%;background-color:rgba(180,180,180,0.3)}
+#myregister{width: 400px; float:right; padding:20px;margin-right:105px;margin-top:12%;margin-bottom:5%;background-color:rgba(180,180,180,0.3)}
+#mylogin{width: 400px; float:right; padding:20px;margin-right:105px;margin-top:12%;margin-bottom:8.9%;background-color:rgba(180,180,180,0.3)}
 #login-box{margin-right:0px;}
-
+#login-box label{width: 130px;}
+#login-control {margin-left: 70px;}
+.input-control{margin-left: 160px !important;}
+#register-box label{width: 130px;}
+#register-control {margin-left: 70px;}
+#lang-box{font-size: 16px; position: absolute; right: 130px; top: 75px; float: left;}
+#lang-box a{cursor: pointer;}
 
 .hero-unit {background-image:url(../img/back.png);color:#ddd;overflow:hidden;}
 .hero-unit {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}

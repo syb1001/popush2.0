@@ -2,17 +2,10 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
-				<li class="active dropdown" id="ownedfile">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><span>{{'OWNING_FILES' | translate}}</span><b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<!-- 新建文件 -->
-						<li><a href="#newfile" data-toggle="modal">{{'NEW_FILE' | translate}}</a></li>
-						<!-- 新建文件夹 -->
-						<li><a href="#newfile" data-toggle="modal">{{'NEW_FOLDER' | translate}}</a></li>
-					</ul>
-				</li>
-				<li id="ownedfileex" class="hide"><a href="javascript:;" onclick=>{{'OWNING_FILES' | translate}}</a></li>
-				<li id="sharedfile"><a href="javascript:;">{{'SHARED_FILES' | translate}}</a></li>
+				<!-- 个人文件标签页 -->
+				<li id="ownedfile"><a ui-sref="myfile">{{'OWNING_FILES' | translate}}</a></li>
+				<!-- 共享文件标签页 -->
+				<li id="sharedfile" class="active"><a href="javascript:;">{{'SHARED_FILES' | translate}}</a></li>
 			</ul>
 		</div>
 	</div>

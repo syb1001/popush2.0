@@ -3,16 +3,54 @@
  *
  * 语言模块
  *
- * 作者：巩运青
- *
  * 模块依赖项：
  * pascalprecht.translate (外部依赖项 angular-translate)
  *
  */
-angular.module('app.translate', ['pascalprecht.translate']);
+angular.module('app.translate', ['pascalprecht.translate', 'ngCookies']);
 
+/**
+ * 支持的所有语言
+ */
 angular.module('app.translate')
-	.config(['$translateProvider', function($translateProvider/*, $cookies*/) {
+	.value('LANGS', [
+		{name: '中文', key: 'zh_cn'},
+		{name: 'English', key: 'en_us'}
+	]);
+
+/**
+ * 默认语言
+ */
+angular.module('app.translate')
+	.config(['$translateProvider', function($translateProvider) {
+		// 选择初始语言
+		$translateProvider.preferredLanguage('en_us');
+	}]);
+
+/**
+ * 存储用户语言偏好
+ */
+angular.module('app.translate')
+	.run(['$translate', '$cookies', function($translate, $cookies) {
+		// 使用cookie记录用户语言
+		if ($cookies.language) {
+			$translate.uses($cookies.language);
+		} else {
+			$cookies.language = $translate.uses();
+		}
+	}]);
+
+/**
+ * 首页语言控制
+ */
+angular.module('app.translate')
+	.controller('HomeLangCtrl', ['$scope', '$translate', '$cookies', 'LANGS', HomeLangCtrl]);
+
+/**
+ * 各语言词库
+ */
+angular.module('app.translate')
+	.config(['$translateProvider', function($translateProvider) {
 
 		// 英文
 		$translateProvider.translations('en_us', {
@@ -28,23 +66,27 @@ angular.module('app.translate')
 			"BUTTON_TEXT_EN":	"English",
 			"BUTTON_TEXT_CN":	"Chinese",
 			"ABOUT_TEAM":		"All rights reserved | Smart Programmers",
-			"OWNING_FILES":		"my files",
-			"SHARED_FILES":		"shared files",
-			"NEW_FILE":			"new file",
-			"NEW_FOLDER":		"new folder",
-			"CURRENT_DIR":		"current directory",
-			"SHARE_USER":		"share user",
-			"FILE_NAME":		"file name",
-			"STATUS": 			"status",
-			"MODIFY_TIME":		"modify time",
-			"SHARE_MANAGE":		"share manage",
-			"DELETE":			"delete",
-			"RENAME":			"rename",
-			"NO_FILE":			"no file"
+			"OWNING_FILES":		"My files",
+			"SHARED_FILES":		"Shared files",
+			"NEW_FILE":			"New file",
+			"NEW_FOLDER":		"New folder",
+			"CURRENT_DIR":		"Current directory",
+			"SHARE_USER":		"Share user",
+			"FILE_NAME":		"File name",
+			"STATUS": 			"Status",
+			"MODIFY_TIME":		"Modify time",
+			"SHARE_MANAGE":		"Share",
+			"DELETE":			"Delete",
+			"RENAME":			"Rename",
+			"NO_FILE":			"No file",
+			"CHANGE_PASSWORD":	"Change Password",
+			"CHANGE_AVATAR":	"Change Avatar",
+			"LOGOUT":			"Log out",
+			"LANGUAGE":			"language"
 		});
 
 		// 中文
-		$translateProvider.translations('cn_zh', {
+		$translateProvider.translations('zh_cn', {
 			"USERNAME":         "用户名",
 			"YOUR_USERNAME":    "您的用户名",
 			"PASSWORD":         "密码",
@@ -69,13 +111,10 @@ angular.module('app.translate')
 			"SHARE_MANAGE":		"共享管理",
 			"DELETE":			"删除",
 			"RENAME":			"重命名",
-			"NO_FILE":			"没有文件"
+			"NO_FILE":			"没有文件",
+			"CHANGE_PASSWORD":	"修改密码",
+			"CHANGE_AVATAR":	"修改头像",
+			"LOGOUT":			"退出",
+			"LANGUAGE":			"语言"
 		});
-
-		// 选择初始语言
-		$translateProvider.preferredLanguage('en_us');
-		
-
-		// 使用localstorage保存当前的语言选择
-		// $translateProvider.useLocalStorage();
-}]);
+	}]);
