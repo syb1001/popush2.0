@@ -15,7 +15,7 @@ angular.module('app.socket', []);
  * 连接到服务器地址
  */
 angular.module('app.socket')
-	.value('SOCKET_IO', 'localhost');
+	.value('SOCKET_IO', '127.0.0.1:4444');
 
 /**
  * socket.io封装

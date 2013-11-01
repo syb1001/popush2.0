@@ -8,6 +8,7 @@ function LoginCtrl($scope, $location, socket, GlobalCtrl) {
 			$scope.message = '用户名或密码错误，请重新输入';
 		} else {
 			$scope.message = '登陆成功!';
+			GlobalCtrl.user = data.user;
 			$location.path('/dashboard');
 		}
 	});

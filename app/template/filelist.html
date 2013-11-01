@@ -1,30 +1,52 @@
-<div id="filecontrol">
+<div id="filecontrol" class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li class="active dropdown" id="ownedfile">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><span localization>owningfiles</span><b class="caret"></b></a>
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><span>{{'OWNING_FILES' | translate}}</span><b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#newfile" data-toggle="modal" onclick="newfileopen()" localization>newfile</a></li>
-						<li><a href="#newfile" data-toggle="modal" onclick="newfolderopen()" localization>newfolder</a></li>
-						<!--<li class="divider"></li>
-						<li><a href="javascript:;" localization>import</a></li>-->
+						<!-- 新建文件 -->
+						<li><a href="#newfile" data-toggle="modal">{{'NEW_FILE' | translate}}</a></li>
+						<!-- 新建文件夹 -->
+						<li><a href="#newfile" data-toggle="modal">{{'NEW_FOLDER' | translate}}</a></li>
 					</ul>
 				</li>
-				<li id="ownedfileex" class="hide"><a href="javascript:;" onclick="ownedfilelist()" localization>owningfiles</a></li>
-				<li id="sharedfile"><a href="javascript:;" onclick="sharedfilelist()" localization>sharedfiles</a></li>
+				<li id="ownedfileex" class="hide"><a href="javascript:;" onclick=>{{'OWNING_FILES' | translate}}</a></li>
+				<li id="sharedfile"><a href="javascript:;">{{'SHARED_FILES' | translate}}</a></li>
 			</ul>
 		</div>
 	</div>
 	
 	<div class="row-fluid" id="file-list">
 		<div class="span10">
-			<p><span localization>currentdir:</span><span id="current-dir"></span></p>
+			<p><span>{{'CURRENT_DIR' | translate}}:</span><span id="current-dir"></span></p>
+			<!-- 文件列表 -->
 			<table class="table table-hover" id="file-list-table">
+				<tbody>
+					<tr class="head">
+						<th class="col1">&nbsp;</th>
+						<th class="col2">{{"FILE_NAME" | translate}}</th>
+						<th class="col3">{{"STATUS" | translate}}</th>
+						<th class="col4">{{"MODIFY_TIME" | translate}}</th>
+						<th class="col5">&nbsp;</th>
+					</tr>
+					<tr ng-repeat="doc in list">
+						<td class="col1"><img src={{doc.iconPath}}></td>
+						<td class="col2"><a href="javascript:;">{{doc.fileName}}</a></td>
+						<td class="col3"></td>
+						<td class="col4">{{doc.modifyTime}}</td>
+						<td class="col5 dropdown">
+							<a href="javascript:;" class="dropdown-toggle opreation">&nbsp;</a>
+							<ul class="dropdown-menu">
+								<li ng-repeat="item in dropdownItems"><a href={{item.href}}>{{item.text | translate}}</a></li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 		<div class="span2">
-			<span localization>shareduser</span>：
+			<span>{{'SHARE_USER' | translate}}</span>：
 			<div id="member-list">
 				<img src="images/character.png" width="40" height="40" class="pull-left shared-character"/>
 			</div>

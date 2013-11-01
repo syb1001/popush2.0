@@ -2,6 +2,9 @@ function GlobalCtrl(socket, VERSION) {
 
 	var isconnect = false;
 
+	var user;
+	var currentPath;
+
 	socket.on('connect', function(){
 		console.log('connected!');
 		socket.emit('version', {});
@@ -14,6 +17,8 @@ function GlobalCtrl(socket, VERSION) {
 	});
 
 	return {
+		user : user,
+		currentPath: currentPath,
 		isbuild : isconnect
 	};
 }

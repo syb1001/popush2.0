@@ -4,9 +4,9 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 
 .switch-rel {margin:5px 0 0 120px;}
 
-.myhome{background-image: url(../img/background.png);height: 800px;width: auto;}
-#myregister{float:right; padding:20px;margin-right:80px;margin-top:230px;margin-bottom:140px;background-color:rgba(180,180,180,0.3)}
-#mylogin{float:right; padding:20px;margin-right:80px;margin-top:280px;margin-bottom:140px;background-color:rgba(180,180,180,0.3)}
+.myhome{background-image: url(../img/background.png);height: 675px;width: auto;min-width:1150px;}
+#myregister{float:right; padding:20px;margin-right:95px;margin-top:12%;margin-bottom:5%;background-color:rgba(180,180,180,0.3)}
+#mylogin{float:right; padding:20px;margin-right:95px;margin-top:12%;margin-bottom:8.9%;background-color:rgba(180,180,180,0.3)}
 #login-box{margin-right:0px;}
 
 
@@ -24,16 +24,16 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 
 #file-list-table .col2, #file-list-table .col3, #file-list-table .col4, #file-list-table .col5 {vertical-align:middle;}
 #file-list-table .col1 {width:40px;text-align:right;}
-#file-list-table .col3 {width:40px;text-align:center;}
+#file-list-table .col3 {width:45px;text-align:center;}
 #file-list-table .col3.owner {width:140px;text-align:center;}
 #file-list-table .col3.owner img {max-width:32px;max-height:32px;margin-right:7px;}
 #file-list-table .col4 {width:155px;text-align:center;}
 #file-list-table .col5 {width:24px;text-align:left;}
-#file-list-table .col5 .opreation {background-image:url(../images/set.png);min-width:24px;min-height:24px;width:24px;height:24px;display:block;text-decoration:none;}
-#file-list-table .col5 .opreation:hover {background-image:url(../images/set-hover.png);text-decoration:none;}
+#file-list-table .col5 .opreation {background-image:url(../img/set.png);min-width:24px;min-height:24px;width:24px;height:24px;display:block;text-decoration:none;}
+#file-list-table .col5 .opreation:hover {background-image:url(../img/set-hover.png);text-decoration:none;}
 #file-list-table .col5 .opreation.disabled {cursor:default;}
-#file-list-table .col5 .opreation.disabled:hover {background-image:url(../images/set.png);text-decoration:none;}
-#file-list-table .col5.open .opreation {background-image:url(../images/set-hover.png);text-decoration:none;}
+#file-list-table .col5 .opreation.disabled:hover {background-image:url(../img/set.png);text-decoration:none;}
+#file-list-table .col5.open .opreation {background-image:url(../img/set-hover.png);text-decoration:none;}
 #file-list-table .head, #file-list-table .head:hover {background:#eee;}
 #file-list .shared-character {margin:3px;}
 #file-list .span10 {min-height:380px;}

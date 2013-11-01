@@ -360,7 +360,7 @@ function backtologin() {
 
 ///////////////////// websocket & callback //////////////////////
 
-var socket = io.connect(SOCKET_IO);
+var socket = io.connect("127.0.0.1:4444");
 
 socket.on('unauthorized', function(){
 	backtologin();

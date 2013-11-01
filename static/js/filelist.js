@@ -1,5 +1,6 @@
 var allFileLists = [];
 
+// 变成一个factory注入
 var exttoicon = {
 	'c':		'c',
 	'clj':		'clj',
@@ -41,6 +42,7 @@ function fileList(table) {
 	
 	var mode = 3;
 	
+	// 已写入
 	var getpic = function(type, shared, ext) {
 		var s = 'images/ext/';
 		if(type == 'dir') {
@@ -61,6 +63,7 @@ function fileList(table) {
 	
 	var haveloading = false;
 	
+	// 
 	function formatDate(t) {
 		var o = t.getMonth() + 1;
 		var h = t.getHours();
