@@ -46,8 +46,8 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 	});
 
 	// 文件管理页，父页面，抽象
-	$stateProvider.state('dashboard', {
-		name: 'dashboard',
+	$stateProvider.state('container', {
+		name: 'container',
 		abstract: true,
 		templateUrl: 'template/dashboard.html'
 	});
@@ -63,6 +63,11 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 				templateUrl: 'template/navbar.html',
 				controller: NavbarCtrl
 			},
+			// // 文件树
+			// 'filetree': {
+			// 	templateUrl: 'template/filetree.html',
+			// 	controller: FileTreeCtrl
+			// },
 			// 文件列表
 			'filelist': {
 				templateUrl: 'template/filelist.html',
