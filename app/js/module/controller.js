@@ -16,5 +16,6 @@ angular.module('app.controller', ['ui.bootstrap'])
 	.controller('LoginCtrl', ['$scope', '$location', 'socket', 'GlobalCtrl', LoginCtrl])
 	.controller('RegisterCtrl', ['$scope', 'socket', 'GlobalCtrl', RegisterCtrl])
 	.controller('NavbarCtrl', ['$scope', NavbarCtrl])
-	.controller('MyFileCtrl', ['$scope', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', MyFileCtrl])
-	.controller('SharedFileCtrl', ['$scope', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', SharedFileCtrl]);
+	.controller('MyFileCtrl', ['$scope', '$location', '$modal', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', MyFileCtrl])
+	.controller('SharedFileCtrl', ['$scope', '$location', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', SharedFileCtrl])
+	.controller('ModalDeleteCtrl', ['$scope', '$modalInstance', 'socket', 'fileName', 'currentPath', ModalDeleteCtrl]);

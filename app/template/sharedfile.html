@@ -19,24 +19,27 @@
 					<tr class="head">
 						<th class="col1">&nbsp;</th>
 						<th class="col2">{{"FILE_NAME" | translate}}</th>
-						<th class="col3">{{"STATUS" | translate}}</th>
+						<th class="col3 owner">{{"OWNER" | translate}}</th>
 						<th class="col4">{{"MODIFY_TIME" | translate}}</th>
 						<th class="col5">&nbsp;</th>
 					</tr>
 					<tr ng-hide="list.length">
 						<td class="col1"></td>
 						<td class="col2">{{"NO_FILE" | translate}}</td>
+						<td class="col3"></td>
+						<td class="col4"></td>
+						<td class="col5"></td>
 					</tr>
 					<tr ng-repeat="doc in list">
 						<td class="col1"><img src={{doc.iconPath}}></td>
 						<td class="col2"><a href="javascript:;">{{doc.fileName}}</a></td>
-						<td class="col3"></td>
+						<td class="col3 owner">
+							<img src={{doc.ownerAvatar}} width="32" height="32" />
+							{{doc.ownerName}}
+						</td>
 						<td class="col4">{{doc.modifyTime}}</td>
-						<td class="col5 dropdown">
-							<a href="javascript:;" class="dropdown-toggle opreation">&nbsp;</a>
-							<ul class="dropdown-menu">
-								<li ng-repeat="item in dropdownItems"><a href={{item.href}}>{{item.text | translate}}</a></li>
-							</ul>
+						<td class="col5">
+							<a href="javascript:;" class="dropdown-toggle disabled opreation">&nbsp;</a>
 						</td>
 					</tr>
 				</tbody>

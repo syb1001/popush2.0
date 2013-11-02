@@ -73,7 +73,7 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 	$stateProvider.state('sharedfile', {
 		name: 'sharedfile',
 		parent: 'main',
-		url: '/shardefile',
+		url: '/sharedfile',
 		templateUrl: 'template/sharedfile.html',
 		controller: SharedFileCtrl
 	});

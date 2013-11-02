@@ -36,16 +36,22 @@
 					<tr ng-hide="list.length">
 						<td class="col1"></td>
 						<td class="col2">{{"NO_FILE" | translate}}</td>
+						<td class="col3"></td>
+						<td class="col4"></td>
+						<td class="col5"></td>
 					</tr>
 					<tr ng-repeat="doc in list">
 						<td class="col1"><img src={{doc.iconPath}}></td>
-						<td class="col2"><a href="javascript:;">{{doc.fileName}}</a></td>
-						<td class="col3"></td>
+						<td class="col2"><a ng-click="openFile(doc.fileName, doc.type)">{{doc.fileName}}</a></td>
+						<td class="col3"><span ng-show="doc.isShared">{{'SHARED' | translate}}</span></td>
 						<td class="col4">{{doc.modifyTime}}</td>
 						<td class="col5 dropdown">
 							<a href="javascript:;" class="dropdown-toggle opreation">&nbsp;</a>
 							<ul class="dropdown-menu">
-								<li ng-repeat="item in dropdownItems"><a href={{item.href}}>{{item.text | translate}}</a></li>
+<!-- 								<li ng-repeat="item in dropdownItems"><a href={{item.href}}>{{item.text | translate}}</a></li>
+ -->								<li><a ng-click="sharemanage(doc.fileName)">{{itemtext1 | translate}}</a></li>
+								<li><a ng-click="deletefile(doc.fileName)">{{itemtext2 | translate}}</a></li>
+								<li><a ng-click="renamefile(doc.fileName)">{{itemtext3 | translate}}</a></li>
 							</ul>
 						</td>
 					</tr>
