@@ -18,12 +18,12 @@ var docobj;
 
 var lock = false;
 var doc;
-var q = [];
+var q = []; /// 文件修改发送队列
 var timer = null;
 
 var ext;
 
-var bq = [];
+var bq = []; /// 断点修改发送队列
 var bps = "";
 var runningline = -1;
 
@@ -32,12 +32,14 @@ var consoleopen = false;
 var old_text;
 var old_bps;
 
+/// 进入队列
 q._push = q.push;
 q.push = function(element) {
 	this._push(element);
 	setsaving();
 }
 
+/// 弹出队列
 q._shift = q.shift;
 q.shift = function() {
 	var r = this._shift();
@@ -47,19 +49,27 @@ q.shift = function() {
 	return r;
 }
 
+/// 当前是否可以运行？
 function runenabled(){
+    /// 可以运行 且 没有在调试 且 (不是正在保存 或者 ？)
 	return (runable && !debugLock && (!issaving || runLock));
 }
 
+/// 当前是否可以调试？
 function debugenabled(){
 	return (debugable && !runLock && (!issaving || debugLock));
 }
 
+/// 更新 运行按钮 调试按钮 的有效性
 function setrunanddebugstate(){
+    /// 在运行按钮的属性 class 中移除 disabled，使得运行按钮点击有效
 	$('#editor-run').removeClass('disabled');
+    /// 在调试按钮的属性 class 中移除 disabled，使得调试按钮点击有效
 	$('#editor-debug').removeClass('disabled');
+    /// 若当前不可运行，则再在运行按钮属性 class 中添加 disabled
 	if(!runenabled())
 		$('#editor-run').addClass('disabled');
+    /// 若当前不可调试，则再在调试按钮属性 class 中添加 disabled
 	if(!debugenabled())
 		$('#editor-debug').addClass('disabled');
 }
@@ -68,10 +78,16 @@ var savetimestamp;
 var issaving = false;
 var savetimeout = 500;
 
+/// 将页面上相关部分调整为与 正在保存 的状态一致的样式
 function setsaving(){
+    /// 红色
 	$('#current-doc-state').addClass('red');
+    /// 正在保存
 	$('#current-doc-state').text(strings['saving...']);
+    /// 将 小房子按钮 title 设为空，防止与下面一条语句的效果冲突
 	$('#editor-back').attr('title', '');
+    /// 为 小房子按钮(即返回主页按钮) 添加 hover 事件
+    /// 当需要保存，但为保存未结束时，当鼠标悬浮 返回主页按钮 时，显示提示“当前文件还没有保存，退出会造成数据丢失”
 	$('#editor-back').popover({
 		html: true,
 		content: strings['unsaved'],
@@ -80,7 +96,9 @@ function setsaving(){
 		container: 'body'
 	});
 	savetimestamp = 0;
+    /// 当前状态为正在保存
 	issaving = true;
+    /// 更新 运行按钮 调试按钮 的有效性
 	setrunanddebugstate();
 }
 
@@ -92,11 +110,15 @@ function setsaved(){
 
 function setsavedthen(timestamp){
 	if(savetimestamp == timestamp) {
+        /// 将当前文档状态的红色去掉，即变成绿色
 		$('#current-doc-state').removeClass('red');
+        /// 显示"已保存"字样
 		$('#current-doc-state').text(strings['saved']);
 		$('#editor-back').popover('destroy');
+        /// 小房子图标，回到主页，这里是将 titile 改为"返回"字样，我们不会这样实现
 		$('#editor-back').attr('title', strings['back']);
 		issaving = false;
+
 		setrunanddebugstate();
 	}
 }
@@ -138,10 +160,13 @@ function newcursor(content) {
 }
 
 function sendbreak(from, to, text){
+	/// 准备 request 数据包
 	var req = {version:doc.version, from:from, to:to, text:text};
+    /// 如果断点发送队列为空，则当即发送数据包，而不需要等到定时发送的时候
 	if(bq.length == 0){
 		socket.emit('bps', req);
 	}
+    /// 将断点数据包加入发送队列，将来收到 bpsok 消息时再从队列中弹出一个包
 	bq.push(req);
 }
 
@@ -329,6 +354,7 @@ function appendtoconsole(content, type) {
 	o.scrollTop = o.scrollHeight;
 }
 
+/// The function will be executed when the DOM is ready.
 $(function() {
 
 	expressionlist.renameExpression = function(id) {
@@ -387,6 +413,8 @@ $(function() {
 
 });
 
+/// 收到 add-expr 消息，增加监视
+/// add-expr 消息内容包括: expr, val
 socket.on('add-expr', function(data) {
 	if(data.expr) {
 		expressionlist.addExpression(data.expr);
@@ -428,6 +456,8 @@ socket.on('shared', function(data) {
 	appendtochatbox(strings['systemmessage'], 'system', data.name + '&nbsp;' + strings['gotshared'], new Date(data.time));
 });
 
+/// 收到 moved 消息，当前房间已被移动，也就是说你所在的文档，是由别人分享给你的，对方把这个文档移动了位置
+/// moved 消息的内容是 ?
 socket.on('moved', function(data) {
 	var thepath = data.newPath.split('/');
 	thepath.shift();
@@ -613,7 +643,9 @@ function run() {
 	}
 }
 
+/// 将页面上的有关部分设置为 正在运行 的样式
 function setrun() {
+    /// 锁
 	runLock = true;
 	$('#editor-run').html('<i class="icon-stop"></i>');
 	$('#editor-run').attr('title', strings['kill-title']);
@@ -621,6 +653,7 @@ function setrun() {
 	$('#console-input').val('');
 	$('#editor-debug').addClass('disabled');
 	$('#console-title').text(strings['console']);
+    /// 显示控制台
 	openconsole();
 }
 
@@ -651,6 +684,7 @@ function setdebug() {
 	openconsole();
 }
 
+/// 逐语句 step in
 function debugstep() {
 	if(debugLock && waiting) {
 		socket.emit('step', {
@@ -658,6 +692,8 @@ function debugstep() {
 	}
 }
 
+/// 此函数添加在 html 标签中，点击时触发
+/// 逐过程 over
 function debugnext() {
 	if(debugLock && waiting) {
 		socket.emit('next', {
@@ -665,6 +701,8 @@ function debugnext() {
 	}
 }
 
+/// 此函数添加在 html 标签中，点击时触发
+/// 跳出过程 step out
 function debugfinish() {
 	if(debugLock && waiting) {
 		socket.emit('finish', {
@@ -672,6 +710,8 @@ function debugfinish() {
 	}
 }
 
+/// 此函数添加在 html 标签中，点击时触发
+/// 继续 resume
 function debugcontinue() {
 	if(debugLock && waiting) {
 		socket.emit('resume', {
@@ -679,6 +719,8 @@ function debugcontinue() {
 	}
 }
 
+/// 此函数添加在 html 标签中，点击时触发
+/// 控制台开关;
 function toggleconsole() {
 	if(consoleopen) {
 		closeconsole();
@@ -687,19 +729,25 @@ function toggleconsole() {
 	}
 }
 
+
 function closeconsole() {
 	if(!consoleopen)
 		return;
 	consoleopen = false;
+    /// 隐藏控制台
 	$('#under-editor').hide();
+    /// 从 控制台开关按钮 的属性 class 中移除 active
 	$('#editor-console').removeClass('active');
 	resize();
 }
 
+
 function openconsole() {
 	if(!consoleopen) {
 		consoleopen = true;
+        /// 显示控制台
 		$('#under-editor').show();
+        /// 在 控制台开关按钮 的属性 class 中添加 active
 		$('#editor-console').addClass('active');
 		resize();
 	}
@@ -750,9 +798,13 @@ function resize() {
 	editor.refresh();
 }
 
+/// 收到 run 消息，当前文档被对方运行
+/// run 消息内容包含 name, time
 socket.on('run', function(data){
+    /// 在 聊天窗口 中添加一条 系统消息 显示
 	appendtochatbox(strings['systemmessage'], 'system', data.name + '&nbsp;&nbsp;' + strings['runsaprogram'], new Date(data.time));
 	setrun();
+    /// operationLock 是 popush.js 中定义的全局变量，bool 类型
 	operationLock = false;
 });
 
@@ -818,6 +870,8 @@ socket.on('stderr', function(data){
 	appendtoconsole(data.data, 'stderr');
 });
 
+/// 收到 exit 消息，当前文档结束运行
+/// 消息内容是: err
 socket.on('exit', function(data){
 	operationLock = false;
 
@@ -857,6 +911,8 @@ socket.on('exit', function(data){
 	$('#console-title').text(strings['console'] + strings['finished']);
 });
 
+/// 收到 join 消息，当前房间有用户进入
+/// 内容: name, time
 socket.on('join', function(data){
 	if(data.err) {
 		showmessageindialog('openeditor', data.err);
@@ -873,6 +929,8 @@ socket.on('join', function(data){
 	}
 });
 
+/// 收到 leave 消息，当前房间有用户离开
+/// 内容: name, time
 socket.on('leave', function(data){
 	memberlistdoc.setonline(data.name, false);
 	memberlistdoc.sort();
@@ -884,8 +942,11 @@ socket.on('leave', function(data){
 	}
 });
 
+/// 收到 set 消息, 成功进入房间，更准确的说是成功进入某个文件的编辑界面，任意文件，包括自己的，共享给别人的，别人共享的
+/// set 消息内容包括: id, users, version, text, bps, exprs
 socket.on('set', function(data){
-	
+
+    /// 时间戳
 	savetimestamp = 1;
 	setsavedthen(1);
 
@@ -994,7 +1055,10 @@ socket.on('set', function(data){
 	delete data.state;
 });
 
+/// 收到 ok 消息，修改文档成功
+/// ok 消息的内容是 null
 socket.on('ok', function(data){
+    /// 从队列中弹出一个数据包
 	var chg = q.shift();
 	if(!chg)
 		return;
@@ -1017,8 +1081,11 @@ socket.on('ok', function(data){
 	}
 });
 
+/// 收到 bpsok 消息，断点修改成功
 socket.on('bpsok', function(data){
+	/// 收到服务端的确认后移出队列
 	var chg = bq.shift();
+    /// 若 chg 为空，即收到 bpsok 消息时，发送队列已经清空，则返回
 	if (!chg)
 		return;
 	bps = bps.substr(0, chg.from) + chg.text + bps.substr(chg.to);
@@ -1042,6 +1109,8 @@ socket.on('bpsok', function(data){
 	}
 });
 
+// 收到 bps 消息，情景是对方添加或删除断点
+// bps 消息内容包括 version, from, to, text
 socket.on('bps', function(data){
 	var tfrom = data.from;
 	var tto = data.to;
@@ -1094,6 +1163,7 @@ socket.on('bps', function(data){
 	if (data.to == data.from + 1){
 		if (data.text == "1"){
 			var element = $('<div><img src="images/breakpoint.png" /></div>').get(0);
+            /// 调用 codemirror 方法： cm.setGutterMarker(line: integer|LineHandle, gutterID: string, value: Element) → LineHandle
 			editor.setGutterMarker(data.from, 'breakpoints', element);
 		}
 		else if (data.text == "0"){
@@ -1110,11 +1180,14 @@ socket.on('bps', function(data){
 	}
 });
 
+/// 收到 change 消息，情景是当前文档被对方程序员修改
+/// change 消息内容包括 version, from, to, text
 socket.on('change', function(data){
-	lock = true;
+	lock = true; // 全局变量
 	var tfrom = data.from;
 	var tto = data.to;
 	var ttext = data.text;
+    /// 更新本地文件修改数据包队列
 	for (var i = 0; i < q.length; i++){
 		if (q[i].to <= tfrom){
 			tfrom += q[i].text.length + q[i].from - q[i].to;
@@ -1153,6 +1226,7 @@ socket.on('change', function(data){
 		q[i].version++;
 		q[i].version = q[i].version % 65536;
 	}
+    /// 更新本地断点修改数据包发送队列
 	for (var i = 0; i < bq.length; i++){
 		bq[i].version++;
 		bq[i].version = bq[i].version % 65536;
@@ -1247,6 +1321,8 @@ socket.on('change', function(data){
 	}
 	//var cursor = editorDoc.getCursor();
 	//var curfrom = editor.indexFromPos(cursor);
+    /// 全局变量editor 在 popush.js 中声明.
+    /// 然后调用codemirror的方法： doc.replaceRange(replacement: string, from: {line, ch}, to: {line, ch})
 	editor.replaceRange(ttext, editor.posFromIndex(tfrom), editor.posFromIndex(tto));
 	//if (curfrom == tfrom){
 	//	editorDoc.setCursor(cursor);
@@ -1311,16 +1387,25 @@ socket.on('change', function(data){
 		hist.undone[i].headAfter = hist.undone[i].changes[0].from;
 		hist.undone[i].headBefore = hist.undone[i].changes[0].from;
 	}
+    /// 调用 codemirror 的方法: doc.setHistory(history: object)
+    /// Replace the editor's undo history with the one provided
 	editorDoc.setHistory(hist);
+    /// doc 是全局变量
 	doc.text = doc.text.substr(0, data.from) + data.text + doc.text.substr(data.to);
 	doc.version++;
 	doc.version = doc.version % 65536;
 	if(q.length > 0){
 		socket.emit('change', q[0]);
 	}
-	
+
+	/// 调用 codemirror 的方法: doc.posFromIndex(index: integer) → {line, ch}
+    /// 由 index 得到相应的包含行、列信息的对象
+	/// Calculates and returns a {line, ch} object for a zero-based index who's value is relative to the start of the editor's text.
 	var pos = editor.posFromIndex(data.from + data.text.length);
+    /// cursors 是一个全局变量，一个Object
 	cursors[data.name].pos = data.from + data.text.length;
+    /// 调用 codemirror 的方法: cm.addWidget(pos: {line, ch}, node: Element, scrollIntoView: boolean)
+    /// Puts node, which should be an absolutely positioned DOM node, into the editor, positioned right below the given {line, ch} position.
 	editor.addWidget(pos, cursors[data.name].element, false);
 });
 
@@ -1329,6 +1414,7 @@ var bufferfrom = -1;
 var bufferto = -1;
 var buffertimeout = SAVE_TIME_OUT;
 
+///
 function sendbuffer(){
 	if (bufferfrom != -1) {
 		if (bufferto == -1){
@@ -1349,24 +1435,33 @@ function sendbuffer(){
 			bufferfrom = -1;
 			bufferto = -1;
 		}
+        /// 将 buffertimeout 重置为 1s; SAVE_TIME_OUT 是 conf.js 中定义的全局变量，值为1000;
 		buffertimeout = SAVE_TIME_OUT;
 	}
 }
 
 function save(){
+    /// 将页面上相关部分调整为与 正在保存 的状态一致的样式
 	setsaving();
+    /// 若 timer 不为null, 则清除定时
 	if (timer != null){
 		clearTimeout(timer);
 	}
+    /// 等待 buffertimeout 时间后，调用 sendbuffer()
 	timer = setTimeout("sendbuffer()", buffertimeout);
 }
 
 function registereditorevent() {
-	
+
+    /// 注册 codemirror 的 change 事件处理, "change" 是一个codemirror事件关键字
+    /// Fires every time the content of the editor is changed.
+    /// chg 应该是数据包
 	CodeMirror.on(editor.getDoc(), 'change', function(editorDoc, chg){
+        /// 以下内容当 editor.getDoc() 发生改变时触发
 
 		//console.log(chg);
 
+        /// 如果正在调试
 		if(debugLock){
 			return true;
 		}
