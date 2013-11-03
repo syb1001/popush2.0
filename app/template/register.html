@@ -1,9 +1,9 @@
 <div id="myregister">
 	<div>
 		<h2 style="text-align:center" class="blink">{{'REGISTER' | translate}}</h2>
-		<div class="alert" id="register-message">
-			<button type="button" class="close">&times;</button>
-			<span>{{message}}</span>
+		<div class="alert" id="register-message" ng-show="showMessage">
+			<button type="button" class="close" ng-click="closeMessage()">&times;</button>
+			<span>{{message | translate}}</span>
 		</div>
 		<hr />
 		<form id="register-box" class="form-horizontal" style="min-width:420px;position:relative;" ng-submit="registerSubmit()">

@@ -2,6 +2,8 @@
 h1, h2, h3, h4, h5, h6 {font-weight:normal;}
 input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;}
 
+a {cursor: pointer;}
+
 .switch-rel {margin:5px 0 0 120px;}
 
 .myhome{background-image: url(../img/background.png);height: 675px;width: auto;min-width:1150px;}
@@ -9,12 +11,19 @@ input, button {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grand
 #mylogin{width: 400px; float:right; padding:20px;margin-right:105px;margin-top:12%;margin-bottom:8.9%;background-color:rgba(180,180,180,0.3)}
 #login-box{margin-right:0px;}
 #login-box label{width: 130px;}
-#login-control {margin-left: 70px;}
+#login-control {margin-left: 75px;}
+#login-control button {text-align: right;}
 .input-control{margin-left: 160px !important;}
 #register-box label{width: 130px;}
-#register-control {margin-left: 70px;}
+#register-control {margin-left: 75px;}
 #lang-box{font-size: 16px; position: absolute; right: 130px; top: 75px; float: left;}
-#lang-box a{cursor: pointer;}
+#filecontrol{margin-top:20px;};
+#fileback-skin1{background-image:url(../img/filebacklight.png) !important;height:658px;}
+#fileback-skin2{background-image:url(../img/fileback.png) !important;height:658px;}
+#filelist{color:#fff;}
+#navskin2{background-color:#3C3C3C;}
+#thskin2{background-color:#3C3C3C; color:#fff;}
+#letterskin2{color:#fff;}
 
 .hero-unit {background-image:url(../img/back.png);color:#ddd;overflow:hidden;}
 .hero-unit {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}

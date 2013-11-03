@@ -1,8 +1,8 @@
-function GlobalCtrl(socket, VERSION) {
+function GlobalCtrl($route, $cookies, socket, VERSION) {
 
-	var isconnect = false;
+	var connected = false;
 
-	var user;
+	var user = {};
 	var currentPath;
 
 	socket.on('connect', function(){
@@ -11,14 +11,20 @@ function GlobalCtrl(socket, VERSION) {
 	});
 
 	socket.on('version', function(data){
-		console.log(data.version);
-		VERSION = data.version;
-		isconnect = true;
+		if (data.version != VERSION) {
+			$route.reload();
+		}
+		connected = true;
+		if ($cookies.sid) {
+			socket.emit('relogin', {
+				sid: $cookies.sid
+			});
+		}
 	});
 
 	return {
 		user : user,
 		currentPath: currentPath,
-		isbuild : isconnect
+		connected : connected
 	};
 }

@@ -1,13 +1,18 @@
-function LoginCtrl($scope, $location, socket, GlobalCtrl) {
+function LoginCtrl($scope, $location, $cookies, socket, GlobalCtrl) {
 
-	$scope.message = '请输入登录信息~';
+	$scope.message = '';
+	$scope.showMessage = false;
 
 	socket.on('login', function(data) {
 		console.log('logged in!');
-		if(data.err) {
-			$scope.message = '用户名或密码错误，请重新输入';
+		if (data.err) {
+			delete $cookies.sid;
+			$scope.message = 'LOGIN_FAILED';
+			$scope.showMessage = true;
 		} else {
-			$scope.message = '登陆成功!';
+			$cookies.sid = data.sid;
+			$scope.message = 'LOGIN_SUCCESS';
+			$scope.showMessage = true;
 			GlobalCtrl.user = data.user;
 			GlobalCtrl.currentPath = '/' + data.user.name;
 			$location.path('/myfile');
@@ -15,9 +20,21 @@ function LoginCtrl($scope, $location, socket, GlobalCtrl) {
 	});
 
 	$scope.loginSubmit = function() {
-		socket.emit('login', {
-			name: $scope.loginName,
-			password: $scope.loginPassword
-		})
+		if (!$scope.loginName) {
+			$scope.message = 'USERNAME_REQUIRED';
+			$scope.showMessage = true;
+		} else if (!$scope.loginPassword) {
+			$scope.message = 'PASSWORD_REQUIRED';
+			$scope.showMessage = true;
+		} else {
+			socket.emit('login', {
+				name: $scope.loginName,
+				password: $scope.loginPassword
+			});
+		}
+	};
+
+	$scope.closeMessage = function() {
+		$scope.showMessage = false;	
 	};
 }

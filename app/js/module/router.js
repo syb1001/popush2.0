@@ -84,9 +84,7 @@ angular.module('app.router').config(['$stateProvider', function($stateProvider) 
 		name: 'edit',
 		parent: 'main',
 		url: '/edit',
-		template: '<div>edit page</div><a ui-sref="myfile">to myfile</a>',
-		controller: function() {
-			alert('edit page');
-		}
+		templateUrl: 'template/editor.html',
+		controller: EditorCtrl
 	});
 }]);

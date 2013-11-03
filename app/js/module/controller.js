@@ -8,14 +8,14 @@
  * ui.bootstrap (外部依赖项UI-Bootstrap)
  * 
  */
-angular.module('app.controller', ['ui.bootstrap'])
+angular.module('app.controller', ['ui.bootstrap', 'angularFileUpload', 'ui.codemirror'])
 	.value('VERSION', 0)
-	.factory('GlobalCtrl', ['socket', 'VERSION', GlobalCtrl])
+	.factory('GlobalCtrl', ['$route', '$cookies', 'socket', 'VERSION', GlobalCtrl])
 	.factory('FileTypeCtrl', [FileTypeCtrl])
 	.factory('UtilCtrl', [UtilCtrl])
-	.controller('LoginCtrl', ['$scope', '$location', 'socket', 'GlobalCtrl', LoginCtrl])
+	.controller('LoginCtrl', ['$scope', '$location', '$cookies', 'socket', 'GlobalCtrl', LoginCtrl])
 	.controller('RegisterCtrl', ['$scope', 'socket', 'GlobalCtrl', RegisterCtrl])
-	.controller('NavbarCtrl', ['$scope', NavbarCtrl])
+	.controller('NavbarCtrl', ['$scope', '$location', '$cookies', '$translate', '$modal', 'socket', 'GlobalCtrl', 'LANGS', NavbarCtrl])
 	.controller('MyFileCtrl', ['$scope', '$location', '$modal', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', MyFileCtrl])
 	.controller('SharedFileCtrl', ['$scope', '$location', 'socket', 'GlobalCtrl', 'FileTypeCtrl', 'UtilCtrl', SharedFileCtrl])
-	.controller('ModalDeleteCtrl', ['$scope', '$modalInstance', 'socket', 'fileName', 'currentPath', ModalDeleteCtrl]);
+	.controller('EditorCtrl', ['$scope', '$timeout', 'socket', 'GlobalCtrl', EditorCtrl]);
