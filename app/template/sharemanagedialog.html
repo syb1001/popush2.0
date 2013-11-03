@@ -1,0 +1,36 @@
+<div class="modal-header">
+	<h3>{{'SHARE_MANAGE'|translate}}</h3>
+</div>
+<div class="modal-body">
+	<!-- 文件名及提示 -->
+	<p>{{'FILE' | translate}}&nbsp;&nbsp;&nbsp;&nbsp;{{fileName}}</p>
+	<p>{{'SHARED_USERS' | translate}}</p>
+	<!-- 共享用户列表 -->
+	<div id="share-user-box">
+		<ul class="nav nav-pills nav-stacked" id="share-user-list">
+			<li ng-repeat="user in members" ng-class="{'active':user.isSelected}">
+				<a ng-click="selectToggle(user)" >
+					<img class="userlistimg" height="32" width="32" src={{user.avatar}}>
+					{{user.name}}
+				</a>
+			</li>
+		</ul>
+	</div>
+	<!-- 提示信息 -->
+	<div class="alert" id="share-message" ng-show="showMessage">
+		<button type="button" class="close" ng-click="closeMessage()">&times;</button>
+		<span>{{message | translate}}</span>
+	</div>
+	<!-- 添加删除用户 -->
+	<div class="form-inline" id="share-buttons">
+		<span>{{'NEW_USER' | translate}}</span>
+		<input type="text" id="share-inputName" ng-model="shareName" />
+		<button class="btn" type="button" ng-click="share(shareName)">{{'ADD' | translate}}</button>
+		<button class="btn pull-right" type="button" ng-click="unshare()">{{'DELETE' | translate}}</button>
+	</div>
+</div>
+<div class="modal-footer">
+	<div id="share-buttons">
+		<button class="btn" ng-click="close()">{{'BACK' | translate}}</button>
+	</div>
+</div>

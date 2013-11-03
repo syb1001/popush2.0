@@ -1,0 +1,11 @@
+<div class="modal-header">
+	<h3>{{'RENAME_FILE'|translate}}</h3>
+</div>
+<div class="modal-body">
+	{{'NEWFILENAME'|translate}}<input type="text" ng-model="newFileName" required />
+</div>
+<div class="modal-footer">
+	<span style="float:left">{{message | translate}}</span>
+	<button class="btn btn-primary" ng-click="ok(newFileName)">{{'OK'|translate}}</button>
+	<button class="btn btn-warning" ng-click="cancel()">{{'CANCEL'|translate}}</button>
+</div>

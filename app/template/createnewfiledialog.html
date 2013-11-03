@@ -1,0 +1,11 @@
+<div class="modal-header">
+	<h3>{{'CREATE_NEW_FILE'|translate}}</h3>
+</div>
+<div class="modal-body">
+	{{'FILENAME'|translate}}：<input type="text" ng-model="createNewFileName" required />
+</div>
+<div class="modal-footer">
+	<span style="float:left">{{message | translate}}</span>
+	<button class="btn btn-primary" ng-click="ok(createNewFileName)">{{'OK'|translate}}</button>
+	<button class="btn btn-warning" ng-click="cancel()">{{'CANCEL'|translate}}</button>
+</div>
